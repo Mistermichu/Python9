@@ -33,6 +33,17 @@ class MainProcess:
             print("Unsupported file extension.")
             sys.exit(1)
 
+    def edit_data(self):
+        for new_value in self.changes:
+            try:
+                column, row, value = new_value.split(",")
+                column, row = int(column), int(row)
+                self.input_file_data[row][column] = value
+            except IndexError:
+                print(f"WARNING! An incorrect data has been detected: \"{new_value}\".")
+                print(f"Check if expected column and row exist in input file. \nStep skipped")
+                continue
+
 
 
 
