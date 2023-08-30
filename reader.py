@@ -7,12 +7,31 @@ import pickle
 
 class MainProcess:
     def __init__(self, input_file_name, output_file_name):
-        self.inpot_file_name = input_file_name
+        self.input_file_name = input_file_name
         self.output_file_name = output_file_name
         self.changes = []
         self.input_file_data = []
-        
-        pass
+
+    def read_input_file(self):
+        _, extension = os.path.splitext(self.input_file_name)
+        if extension == ".csv":
+            with open(self.input_file_name, "r") as input_file:
+                file_reader = csv.reader(input_file)
+                for row_data in file_reader:
+                    self.input_file_data.append(row_data)
+        elif extension == ".json":
+            with open(self.input_file_name, "r") as input_file:
+                self.input_file_data = json.load(input_file)
+        elif extension == ".txt":
+            with open(self.input_file_name, "r") as input_file:
+                for line in input_file:
+                    self.input_file_data.append(line.strip.split(","))
+        elif extension == ".pickle":
+            with open(self.input_file_name, "rb") as input_file:
+                self.input_file_name = pickle.load(input_file)
+        else:
+            print("Unsupported file extension.")
+            sys.exit(1)
 
 
 
