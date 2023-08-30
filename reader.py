@@ -65,6 +65,24 @@ class MainProcess:
             print("Unsupported file extension.")
             sys.exit(1)
 
+    def process_changes(self):
+        if not os.path.exists(self.input_file_name):
+            print(f"Error. File {self.input_file_name} not found.")
+            sys.exit(1)
+        self.read_input_file()
+        for change_number, requested_change in enumerate(self.changes):
+            column, row, value = requested_change.split(",")
+            try:
+                int(column)
+                int(row)
+            except ValueError:
+                print(f"WARNING! An incorrect data has been detected for change number: \"{change_number}\".")
+                print(f"Check if expected column and row exist in input file. \nStep skipped")
+                continue
+        self.edit_data()
+        self.write_data()
+                
+
 
 
 
