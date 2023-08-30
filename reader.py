@@ -81,6 +81,12 @@ class MainProcess:
                 continue
         self.edit_data()
         self.write_data()
+
+class Reader(MainProcess):
+    def __init__(self, input_file_name, output_file_name, *changes):
+        super().__init__(input_file_name, output_file_name)
+        self.changes = changes
+    
                 
 
 
