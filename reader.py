@@ -1,6 +1,23 @@
 import sys
 import csv
 import os
+import json
+import pickle
+
+
+class MainProcess:
+    def __init__(self, input_file_name, output_file_name):
+        self.inpot_file_name = input_file_name
+        self.output_file_name = output_file_name
+        self.changes = []
+        self.input_file_data = []
+        
+        pass
+
+
+
+
+
 
 input_file_data = []
 
