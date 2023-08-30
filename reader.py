@@ -44,6 +44,27 @@ class MainProcess:
                 print(f"Check if expected column and row exist in input file. \nStep skipped")
                 continue
 
+    def write_data(self):
+        _, extension = os.path.splitext(self.output_file_name)
+        if extension == ".csv":
+            with open(self.output_file_name, "w", newline="") as output_file:
+                file_writer = csv.writer(output_file)
+                for row in self.input_file_data:
+                    file_writer.writerow(row)
+        elif extension == ".json":
+            with open(self.output_file_name, "w") as output_file:
+                json.dump(self.input_file_data, output_file, indent=4)
+        elif extension == ".txt":
+            with open(self.output_file_name, "w") as output_file:
+                for row in self.input_file_data:
+                    output_file.write(".".join(row) + "\n")
+        elif extension == ".pickle":
+            with open(self.output_file_name, "wb") as output_file:
+                pickle.dump(self.input_file_data, output_file):
+        else:
+            print("Unsupported file extension.")
+            sys.exit(1)
+
 
 
 
