@@ -25,10 +25,10 @@ class MainProcess:
         elif extension == ".txt":
             with open(self.input_file_name, "r") as input_file:
                 for line in input_file:
-                    self.input_file_data.append(line.strip.split(","))
+                    self.input_file_data.append(line.strip().split(","))
         elif extension == ".pickle":
             with open(self.input_file_name, "rb") as input_file:
-                self.input_file_name = pickle.load(input_file)
+                self.input_file_data = pickle.load(input_file)
         else:
             print("Unsupported file extension.")
             sys.exit(1)
@@ -57,10 +57,10 @@ class MainProcess:
         elif extension == ".txt":
             with open(self.output_file_name, "w") as output_file:
                 for row in self.input_file_data:
-                    output_file.write(".".join(row) + "\n")
+                    output_file.write(",".join(row) + "\n")
         elif extension == ".pickle":
             with open(self.output_file_name, "wb") as output_file:
-                pickle.dump(self.input_file_data, output_file):
+                pickle.dump(self.input_file_data, output_file)
         else:
             print("Unsupported file extension.")
             sys.exit(1)
